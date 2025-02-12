@@ -5,19 +5,19 @@ using std::vector;
 namespace linter {
 
 bool number_linter(vector<Token>::const_iterator i) {
-    bool out = (++i)->p.type != NUMBER;
+    bool out = (++i)->p.type != NUMBER && i->p.type != DECIMAL;
     i--;
     return out;
 }
 
 bool infix_linter(vector<Token>::const_iterator i) {
-    bool out = (++i)->p.type == NUMBER || i->p.type == RPARE;
+    bool out = (++i)->p.type == NUMBER || i->p.type == DECIMAL || i->p.type == RPARE;
     i--;
     return out;
 }
 
 bool lpare_linter(vector<Token>::const_iterator i) {
-    bool out = (++i)->p.type == NUMBER || i->p.type == LPARE;
+    bool out = (++i)->p.type == NUMBER || i->p.type == DECIMAL || i->p.type == LPARE;
     i--;
     return out; 
 }
@@ -34,7 +34,7 @@ void lint(const vector<Token>& tokens) {
             throw ("lol");
         }
     }
-    if ((--tokens.end())->p.type != NUMBER) {
+    if ((--tokens.end())->p.type != NUMBER && (--tokens.end())->p.type != DECIMAL) {
         throw ("lol");
     }
 }
