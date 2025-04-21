@@ -34,7 +34,7 @@ void lint(const vector<Token>& tokens) {
             throw ("lol");
         }
     }
-    if ((--tokens.end())->p.type != NUMBER && (--tokens.end())->p.type != DECIMAL) {
+    if ((--tokens.end())->p.category == INFIX_OPERATOR) {
         throw ("lol");
     }
 }
